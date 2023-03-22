@@ -1,0 +1,9 @@
+###create
+POST http://localhost:5500/api/create HTTP/1.1
+Content-Type: application/json
+
+{
+    "title": "install dota6",
+    "content" : "how to install dota6 and config files",
+    "author":""
+}
