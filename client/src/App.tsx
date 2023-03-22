@@ -24,21 +24,23 @@ class MyComponent extends Component<{},MyComponentState> {
 
   render() {
     return (
-    <>
-        <div>🌊</div>
-        <div>🦦</div>
-        <div>🌊</div>
-    </>
 
-      // <div>
-      //   <p>Count: {this.state.count}</p>
-      //   <button onClick={this.handleButtonClick}>Increment</button>
-      //   <br />
-      //   <br />
-      //   <Button className='rounded-[1rem]' type='primary'>Test</Button>
-      // </div>
+
+      <div className='container p-5'>
+        <p>Count: {this.state.count}</p>
+        <button onClick={this.handleButtonClick}>Increment</button>
+        <br />
+        <br />
+        <Button className='rounded-[1rem]' type='primary'>Test</Button>
+      </div>
     );
   }
 }
 
 export default MyComponent;
+
+    // <>
+    //     <div>🌊</div>
+    //     <div>🦦</div>
+    //     <div>🌊</div>
+    // </>
