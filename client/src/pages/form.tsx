@@ -1,4 +1,5 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, FormEvent,useEffect } from 'react';
+import axios from 'axios';
 import { PlusOutlined } from '@ant-design/icons';
 import {
   Form,
@@ -20,14 +21,35 @@ import Navbar from '../components/navbar';
 
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
+const apiURL1 = import.meta.env.REACT_APP_API;
+
 
 const FormDisabledDemo: React.FC = () => {
   const [componentDisabled, setComponentDisabled] = useState<boolean>(true);
   const [loadings, setLoadings] = useState<boolean[]>([]);
+  const apiURL = import.meta.env.VITE_API;
+  
+  useEffect(() => {
+    console.log("api :29",apiURL)
+    console.log("api :30",apiURL1)
+  }
+    )
+  
+  
+
 
   const submitForm = (e:any) => {
     // e.preventDefault();
     console.table({title, content, author})
+    console.log(`API URL :${apiURL}`)
+    axios
+    .post(`${process.env.REACT_APP_API}/create`, {title,content,author})
+    .then(response => {
+      alert("บันทึกข้อมูลเรียบร้อย");
+    })
+    .catch(err => {
+      alert(err.response.data.error)
+    })
   }
 
   const [state, setState] = useState({
