@@ -9,11 +9,11 @@ export async function create(req: Request, res: Response){
     console.log(author);
 
     switch (true){
-        case !title:
-            return res.status(400).json({error:"กรุณากรอกข้อมูล"})
+        case !title || '':
+            return res.status(400).json({message:"กรุณากรอกข้อมูล"})
             break;
-        case !content:
-            return res.status(400).json({error:"กรุณาป้อนเนื้อหาบทความ"})
+        case !content || '':
+            return res.status(400).json({message:"กรุณาป้อนเนื้อหาบทความ"})
             break;
         case author == "":
             author = "Anonymous";

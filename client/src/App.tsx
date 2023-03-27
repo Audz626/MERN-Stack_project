@@ -24,8 +24,6 @@ class MyComponent extends Component<{},MyComponentState> {
 
   render() {
     return (
-
-
       <div className='container p-5'>
         <p>Count: {this.state.count}</p>
         <button onClick={this.handleButtonClick}>Increment</button>
