@@ -22,29 +22,22 @@ import Navbar from '../components/navbar';
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 
-
 const FormDisabledDemo: React.FC = () => {
-  const [componentDisabled, setComponentDisabled] = useState<boolean>(true);
   const [loadings, setLoadings] = useState<boolean[]>([]);
   const apiURL = import.meta.env.VITE_API;
-  
-  useEffect(() => {
-    console.log("api :29",apiURL)
-  }
-    )
   
   const submitForm = (e:any) => {
     // e.preventDefault();
     console.table({title, content, author})
     console.log(`API URL :${apiURL}`)
-    axios
-    .post(`${process.env.REACT_APP_API}/create`, {title,content,author})
-    .then(response => {
-      alert("บันทึกข้อมูลเรียบร้อย");
-    })
-    .catch(err => {
-      alert(err.response.data.error)
-    })
+    // axios
+    // .post(`${apiURL}/create`, {title,content,author})
+    // .then(response => {
+    //   alert("บันทึกข้อมูลเรียบร้อย");
+    // })
+    // .catch(err => {
+    //   alert(err)
+    // })
   }
 
   const [state, setState] = useState({
@@ -56,8 +49,10 @@ const FormDisabledDemo: React.FC = () => {
   const {title, content, author} = state;
 
   const inputValue = (name:any) => (event:any) => {
-    // console.log(event.target.value)
-    setState({...state,[name]:event.target.value})
+    // console.log(name);
+    console.log(event.target.value)
+    // setState({...state,[name]:event.target.value})
+    setState({...state,[content]:event.target.value})
   }
 
   const enterLoading = (index : any) => {
@@ -96,7 +91,7 @@ const FormDisabledDemo: React.FC = () => {
             <TextArea rows={4} value={content} onChange={inputValue('content')}/>
           </Form.Item>
           <Form.Item label="ผู้แต่ง">
-            <Input value={author} onChange={inputValue('author')}/>
+            <Input value={author} onChange={(e)=>{setState({...state,'author':e.target.value})}}/>
           </Form.Item>
         <div className='flex justify-center'>
           <Button type="primary" htmlType="submit" loading={loadings[0]} onClick={()=> enterLoading(0)}>บันทึก</Button>
