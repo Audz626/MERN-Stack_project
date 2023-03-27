@@ -21,7 +21,6 @@ import Navbar from '../components/navbar';
 
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
-const apiURL1 = import.meta.env.REACT_APP_API;
 
 
 const FormDisabledDemo: React.FC = () => {
@@ -31,13 +30,9 @@ const FormDisabledDemo: React.FC = () => {
   
   useEffect(() => {
     console.log("api :29",apiURL)
-    console.log("api :30",apiURL1)
   }
     )
   
-  
-
-
   const submitForm = (e:any) => {
     // e.preventDefault();
     console.table({title, content, author})
