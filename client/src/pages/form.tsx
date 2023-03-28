@@ -1,7 +1,7 @@
 import React, { useState, FormEvent, useEffect } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
-import {getCreate} from "../services/api"
+import {Create} from "../services/api"
 import { FormOutlined } from "@ant-design/icons";
 import {
   Card,
@@ -38,7 +38,7 @@ const FormDisabledDemo: React.FC = () => {
 
   const submitForm = async(e:any) => {
     // e.preventDefault();
-    const data = await getCreate(state)
+    const data = await Create(state)
     console.table({ title, content, author });
     console.log(`API URL :${apiURL}`);
     console.log(`return value :${data}`);

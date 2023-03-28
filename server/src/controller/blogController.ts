@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import slugify from 'slugify';
-
 import {myModel} from '../models/blogModel';
 
 export async function create(req: Request, res: Response){
@@ -30,5 +29,16 @@ export async function create(req: Request, res: Response){
     // myModel.create({title,content,author,slug}).then((data) => {
     //     res.json(data);
     // }).catch((error) => {res.status(400).json(error.message)})
+
+};
+
+export const getBlogs = async (req:Request,res:Response) => {
+    try{
+        const allBlog = await myModel.find({}).exec();
+        console.log(allBlog);
+        res.json(allBlog);
+    }catch(error:any) {
+        res.status(400).json(error.message)
+    }
 
 }

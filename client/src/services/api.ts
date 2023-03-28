@@ -5,7 +5,7 @@ interface MyData{
     content: string;
     author: string;
 }
-export const getCreate = (data:MyData) =>{
+export const Create = (data:MyData) =>{
 return axios
     .post(`${API_URL}/create`, data)
     .then((res) => {
@@ -15,3 +15,14 @@ return axios
         return err.response.data.message;
     })
     };
+
+export const getBlogs = () =>{
+    return axios
+    .get(`${API_URL}/blogs`)
+    .then(res => {
+        return res.data;
+    })
+    .catch((err) => {
+        return err.data;
+    })
+}

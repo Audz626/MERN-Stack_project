@@ -1,5 +1,4 @@
 import React, { Component, ComponentState } from 'react';
-import reactLogo from './assets/react.svg';
 import { Button} from "antd";
 import './App.css';
 
