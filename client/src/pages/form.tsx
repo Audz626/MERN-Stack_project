@@ -72,7 +72,6 @@ const FormDisabledDemo: React.FC = () => {
         title: data,
     })
     }
-
     // axios
     //   .post(`${apiURL}/create`, { title, content, author })
     //   .then((response) => {
@@ -103,8 +102,6 @@ const FormDisabledDemo: React.FC = () => {
     //     }
     //   });
   };
-
-
 
   const inputValue = (name: any) => (event: any) => {
     // console.log(name);

@@ -1,11 +1,16 @@
 import { Request, Response } from 'express';
 import slugify from 'slugify';
 import {myModel} from '../models/blogModel';
+import {v4 as uuidv4} from 'uuid';
 
 export async function create(req: Request, res: Response){
     let {title,content,author} = req.body;
-    const slug = slugify(title);
+    let slug = slugify(title);
     console.log(author);
+
+    if (!slug){
+        slug =  uuidv4();
+    }
 
     switch (true){
         case !title || '':
@@ -41,4 +46,15 @@ export const getBlogs = async (req:Request,res:Response) => {
         res.status(400).json(error.message)
     }
 
+}
+
+export const getSingleBlogs = async (req:Request, res:Response) => {
+    try{
+        const {slug} = req.params
+        const singleBlog = await myModel.findOne({slug}).exec();
+        console.log('singleBlog'+ singleBlog);
+        res.json(singleBlog);
+    }catch(error:any) {
+        res.status(400).json(error.message)
+    }
 }

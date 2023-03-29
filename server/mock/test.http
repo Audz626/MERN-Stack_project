@@ -3,10 +3,13 @@ POST http://localhost:5500/api/create HTTP/1.1
 Content-Type: application/json
 
 {
-    "title": "install dota6",
-    "content" : "how to install dota6 and config files",
-    "author":""
+    "title": "ท่องเที่ยวทั่วไทย",
+    "content" : "การเดินทางท่องเที่ยวรอบประเทศไทยในเวลา 1 เดือน ของ Youtuber ชื่อดัง",
+    "author":"audddxd"
 }
 
-###getdata
+###get all data
 GET  http://localhost:5500/api/blogs HTTP/1.1
+
+###get single data from slug
+GET  http://localhost:5500/api/blog/install-gitlab HTTP/1.1 //5673f5f1-7f2d-497e-acca-73885d825f57 สำหรับภาษาไทย 
