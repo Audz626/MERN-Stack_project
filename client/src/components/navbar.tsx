@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Menu } from 'antd';
+import './../assets/style/navbar.css'
 
 const items: MenuProps['items'] = [
   {
@@ -25,7 +26,7 @@ const Navbar: React.FC = () => {
     setCurrent(e.key);
   };
 
-  return <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />;
+  return <Menu className='hover-to-top' onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items}></Menu>;
 };
 
 export default Navbar;
