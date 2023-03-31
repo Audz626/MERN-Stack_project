@@ -12,4 +12,4 @@ Content-Type: application/json
 GET  http://localhost:5500/api/blogs HTTP/1.1
 
 ###get single data from slug
-GET  http://localhost:5500/api/blog/install-gitlab HTTP/1.1 //5673f5f1-7f2d-497e-acca-73885d825f57 สำหรับภาษาไทย 
+GET  http://localhost:5500/api/blog/install-docker HTTP/1.1 //5673f5f1-7f2d-497e-acca-73885d825f57 สำหรับภาษาไทย 

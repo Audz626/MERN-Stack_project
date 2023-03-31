@@ -1,6 +1,8 @@
 .hover-to-top {
     /* display: inline-block; */
     position: sticky;
+    font-weight: bold;
+    font-size: medium;
     /* background-color: transparent; */
     top: 0px;
     z-index: 100;

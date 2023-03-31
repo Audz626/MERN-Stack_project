@@ -26,3 +26,14 @@ export const getBlogs = () =>{
         return err.data;
     })
 }
+
+export const getBlogsBySlug = (data : any) =>{
+    return axios
+    .get(`${API_URL}/blog/${data}`)
+    .then(res => {
+        return res;
+    })
+    .catch((err) => {
+        return err.data;
+    })
+}
