@@ -1,11 +1,14 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/kute.js@2.1.2/dist/kute.min.js");
 
 * {
   font-family: 'Prompt', sans-serif;
 }
 body {
-  background-color: #d8d8d8;
+  background-color: #f0f0f0;
   margin: 0;
   border: 0;
+  overflow-x: hidden;
+
 }

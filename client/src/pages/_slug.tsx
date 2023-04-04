@@ -2,6 +2,7 @@ import { title } from 'process';
 import React, {useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
 import { getBlogsBySlug } from '../services/api';
+import Navbar from '../components/navbar';
 
 interface Blog {
     title : string;
@@ -26,8 +27,12 @@ const _slug: React.FC = () => {
   }, []);
   return (
     <div>
-       {blog?._id}<br/>
-       {blog?.createdAt}
+      <Navbar/>
+      <div className='m-20 p-10 w-[60] h-[100] bg-white rounded-xl'>
+        {blog?._id}<br/>
+        {blog?.createdAt}
+      </div>
+
     </div>
   );
 };

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/navbar";
 import { getBlogs } from "../services/api";
-import { Card, Col, Row } from "antd";
 import { Link } from "react-router-dom";
 import "../App.css";
 
@@ -43,17 +42,20 @@ const Index: React.FC = () => {
           ></path>
         </svg>
 
-        <div className="pt-5 pb-5">
+        <div className="pt-5 pb-5 pl-5 pr-5 grid grid-cols-3 gap-4">
           {blogs.map((blog, index) => (
-            <div className="pl-72 pr-72 pb-3 z-[20]" key={index}>
-              <Card 
-              type="inner" 
-              title={blog.title}
-              extra={<Link to={`/blog/${blog.slug}`}>More</Link>}
-              >
-                <span>{blog.content}</span>
-                {/* <Link to={`/blog/${blog.slug}`}>send data to _slug page</Link> */}
-              </Card>
+            <div className=" bg-white rounded-[1rem] overflow-hidden shadow-lg" key={index}>
+              <div className="px-6 py-4">
+                <div className="font-bold text-xl mb-2">{blog.title}</div>
+                <div>
+                  <p className="text-gray-700 text-base truncate">{blog.content}</p>
+                </div>
+              </div>
+              <div className="px-6 pt-4 pb-2">
+                <Link to={`/blog/${blog.slug}`} className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 hover:bg-gray-300">
+                  Read More
+                </Link>
+              </div>
             </div>
           ))}
         </div>
