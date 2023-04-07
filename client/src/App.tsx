@@ -26,6 +26,11 @@ class MyComponent extends Component<{},MyComponentState> {
       <div className='container p-5'>
         <p>Count: {this.state.count}</p>
         <button onClick={this.handleButtonClick}>Increment</button>
+        <div className="flex flex-col h-16">
+  <p className="overflow-hidden overflow-ellipsis">
+    This is a long text that will be truncated after a certain number of lines.
+  </p>
+</div>
         <br />
         <br />
         <Button className='rounded-[1rem]' type='primary'>Test</Button>

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/navbar";
 import { getBlogs } from "../services/api";
+import { UpSquareOutlined } from "@ant-design/icons";
+import {Button} from 'antd'
 import { Link } from "react-router-dom";
 import "../App.css";
 
@@ -12,7 +14,8 @@ interface Blog {
 }
 
 const Index: React.FC = () => {
-  const [blogs, setBlogs] = useState<Array<Blog>>([])
+  const [blogs, setBlogs] = useState<Array<Blog>>([]);
+  
 
   useEffect(() => {
     getBlogs().then((data) => {
@@ -20,10 +23,53 @@ const Index: React.FC = () => {
     });
   }, []);
 
+  useEffect(() => {
+    const btn:any = document.getElementById("back-to-top");
+    const scrollHandler = () => {
+      if (window.pageYOffset > 300) {
+        btn.classList.add("visible");
+      } else {
+        btn.classList.remove("visible");
+      }
+    };
+  
+    btn.addEventListener("click", () => {
+      const scrollStep = -window.scrollY / (2000 / 15); // set to to back to top for smoothy (fixed this line.)
+      const scrollInterval = setInterval(() => {
+        if (window.scrollY !== 0) {
+          window.scrollBy(0, scrollStep);
+        } else {
+          clearInterval(scrollInterval);
+        }
+      }, 15);
+    });
+  
+    window.addEventListener("scroll", scrollHandler);
+  
+    return () => {
+      window.removeEventListener("scroll", scrollHandler);
+      btn.removeEventListener("click", () => {
+        const scrollStep = 0;
+        const scrollInterval = setInterval(() => {
+          if (window.scrollY !== 0) {
+            window.scrollBy(0, scrollStep);
+          } else {
+            clearInterval(scrollInterval);
+          }
+        }, 15);
+      });
+    };
+  }, []);
+  
+  
+
   return (
     <>
       <div className="w-full">
         <Navbar />
+        <div className="fixed bottom-5 right-10 !z-index-[30]">
+          <Button className="!w-[50px] h-[50px]"  id="back-to-top" shape="circle" icon={<UpSquareOutlined />}></Button>
+        </div>
 
         <svg className="sticky top-10 z-[-99]" viewBox="0 0 500 100">
           <path
@@ -44,15 +90,31 @@ const Index: React.FC = () => {
 
         <div className="pt-5 pb-5 pl-5 pr-5 grid grid-cols-3 gap-4">
           {blogs.map((blog, index) => (
-            <div className=" bg-white rounded-[1rem] overflow-hidden shadow-lg" key={index}>
-              <div className="px-6 py-4">
+            <div
+              className=" bg-white rounded-[1rem] shadow-lg"
+              key={index}
+            >
+              <div className="">
                 <div className="font-bold text-xl mb-2">{blog.title}</div>
-                <div>
-                  <p className="text-gray-700 text-base truncate">{blog.content}</p>
+                <div className="w-full h-[350px] text-center overflow-hidden">
+                  <img
+                    className="w-[100%] object-contain cursor-pointer hover:scale-110 transition-all !duration-500 ease-in-out delay-1"
+                    // className="w-[100%] object-contain hover:scale-110 duration-300 transition-transform ease-in-out"
+                    src="src/assets/hummingbird.jpg"
+                    alt="test"
+                  />
+                </div>
+                <div className="overflow-hidden">
+                  <p className="text-gray-700 text-base truncate overflow-ellipsis">
+                    {blog.content}
+                  </p>
                 </div>
               </div>
               <div className="px-6 pt-4 pb-2">
-                <Link to={`/blog/${blog.slug}`} className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 hover:bg-gray-300">
+                <Link
+                  to={`/blog/${blog.slug}`}
+                  className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 hover:bg-gray-300"
+                >
                   Read More
                 </Link>
               </div>
@@ -64,4 +126,4 @@ const Index: React.FC = () => {
   );
 };
 
-export default () => <Index/>;
+export default () => <Index />;
