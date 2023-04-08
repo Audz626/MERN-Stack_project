@@ -21,6 +21,7 @@
     "typeorm": "^0.3.12"
   },
   "devDependencies": {
+    "@tailwindcss/aspect-ratio": "^0.4.2",
     "@types/dotenv": "^8.2.0",
     "@types/node": "^18.15.6",
     "@types/react": "^18.0.27",

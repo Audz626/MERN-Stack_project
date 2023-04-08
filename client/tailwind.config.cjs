@@ -8,5 +8,9 @@ module.exports = {
   plugins: [],
   corePlugins: {
     preflight: false,
+    aspectRatio: false,
   },
+  plugins: [
+    require('@tailwindcss/aspect-ratio'),
+  ],
 }

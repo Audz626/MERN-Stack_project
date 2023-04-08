@@ -26,7 +26,7 @@ const Index: React.FC = () => {
   useEffect(() => {
     const btn:any = document.getElementById("back-to-top");
     const scrollHandler = () => {
-      if (window.pageYOffset > 300) {
+      if (document.documentElement.scrollTop > window.innerHeight * 0.8) {
         btn.classList.add("visible");
       } else {
         btn.classList.remove("visible");
@@ -61,17 +61,15 @@ const Index: React.FC = () => {
     };
   }, []);
   
-  
-
   return (
     <>
       <div className="w-full">
         <Navbar />
-        <div className="fixed bottom-5 right-10 !z-index-[30]">
-          <Button className="!w-[50px] h-[50px]"  id="back-to-top" shape="circle" icon={<UpSquareOutlined />}></Button>
+        <div className="fixed bottom-4 right-4 z-50 hidden  !z-index-[30]">
+          <Button className="!w-[50px] h-[50px] fixed bottom-5 right-5"  id="back-to-top" shape="circle" icon={<UpSquareOutlined />}></Button>
         </div>
 
-        <svg className="sticky top-10 z-[-99]" viewBox="0 0 500 100">
+        {/* <svg className="sticky top-10 z-[-99]" viewBox="0 0 500 100">
           <path
             d="M 0 20 C 150 150 300 0 500 50 L 500 0 L 0 0"
             fill="rgb(57, 27, 112)"
@@ -86,25 +84,25 @@ const Index: React.FC = () => {
             fill="#0E7452"
             opacity="0.5"
           ></path>
-        </svg>
+        </svg> */}
 
-        <div className="pt-5 pb-5 pl-5 pr-5 grid grid-cols-3 gap-4">
+        <div className="pt-5 pb-5 px-[30rem] grid grid-cols-3 gap-4">
           {blogs.map((blog, index) => (
             <div
               className=" bg-white rounded-[1rem] shadow-lg"
               key={index}
             >
               <div className="">
-                <div className="font-bold text-xl mb-2">{blog.title}</div>
-                <div className="w-full h-[350px] text-center overflow-hidden">
+                <div className="overflow-hidden rounded-t-[1rem] aspect-w-1 aspect-h-1">
                   <img
-                    className="w-[100%] object-contain cursor-pointer hover:scale-110 transition-all !duration-500 ease-in-out delay-1"
+                    className="max-w-full max-h-full object-fill cursor-pointer rounded-t-[1rem] transition-transform !duration-500 ease-in-out hover:scale-110 aspect-w-1 aspect-h-1"
                     // className="w-[100%] object-contain hover:scale-110 duration-300 transition-transform ease-in-out"
                     src="src/assets/hummingbird.jpg"
                     alt="test"
                   />
                 </div>
-                <div className="overflow-hidden">
+                <div className="font-bold text-xl my-4 mx-4 cursor-pointer">{blog.title}</div>
+                <div className="overflow-hidden px-5">
                   <p className="text-gray-700 text-base truncate overflow-ellipsis">
                     {blog.content}
                   </p>
