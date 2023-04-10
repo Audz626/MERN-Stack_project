@@ -23,7 +23,7 @@
     text-decoration: none !important;
   }
   .ant-menu-item:hover{
-    color : #F0E68C !important;
+    color : #f6b822 !important;
   }
 
 
@@ -38,7 +38,7 @@
 .ant-menu-light.ant-menu-horizontal > .ant-menu-item-selected::after,
 .ant-menu-light.ant-menu-horizontal > .ant-menu-submenu-selected::after {
   border-bottom-width: 2px;
-  border-bottom-color: #F0E68C;
+  border-bottom-color: #f6b822;
 }
 
 .ant-menu-light.ant-menu-horizontal > .ant-menu-item:hover::after,
