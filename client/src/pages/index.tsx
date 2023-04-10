@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/navbar";
+import Systembar from "../components/systembar";
 import { getBlogs } from "../services/api";
 import { UpSquareOutlined } from "@ant-design/icons";
 import {Button} from 'antd'
@@ -64,6 +65,7 @@ const Index: React.FC = () => {
   return (
     <>
       <div className="w-full">
+      <Systembar/>
         <Navbar />
         <div className="fixed bottom-4 right-4 z-50 hidden  !z-index-[30]">
           <Button className="!w-[50px] h-[50px] fixed bottom-5 right-5"  id="back-to-top" shape="circle" icon={<UpSquareOutlined />}></Button>
