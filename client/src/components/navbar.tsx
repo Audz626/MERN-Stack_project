@@ -33,19 +33,21 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <div>
-      <nav>
+    <>
+    {/* <div className="sticky"> */}
+      <div className="hover-to-top flex-wrap flex items-center bg-white">
+      <img className="h-[120px] mr-[0px] border-none border-white " src="/src/assets/BIOO.png" alt="test" />
         <Menu
-          className="hover-to-top p-8"
+          className=" py-8 pr-8 border-none bg-transparent tra"
           onClick={onClick}
           selectedKeys={[current]}
           mode="horizontal"
           items={items}
         ></Menu>
-      </nav>
-      ;
-    </div>
-  );
+      </div>
+    {/* </div> */}
+    </>
+  )
 };
 
 export default Navbar;

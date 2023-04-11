@@ -21,7 +21,6 @@ const Index: React.FC = () => {
   const [pageSize, setPageSize] = useState<number>(12);
 
   useEffect(() => {
-    
     getBlogs().then((data) => {
       setBlogs(data.data);
     });
@@ -41,44 +40,6 @@ const Index: React.FC = () => {
     currentPage * pageSize
   );
 
-  useEffect(() => {
-    const btn: any = document.getElementById("back-to-top");
-    const scrollHandler = () => {
-      if (document.documentElement.scrollTop > window.innerHeight * 0.8) {
-        btn.classList.add("visible");
-      } else {
-        btn.classList.remove("visible");
-      }
-    };
-
-    btn.addEventListener("click", () => {
-      const scrollStep = -window.scrollY / (2000 / 15); // set to to back to top for smoothy (fixed this line.)
-      const scrollInterval = setInterval(() => {
-        if (window.scrollY !== 0) {
-          window.scrollBy(0, scrollStep);
-        } else {
-          clearInterval(scrollInterval);
-        }
-      }, 15);
-    });
-
-    window.addEventListener("scroll", scrollHandler);
-
-    return () => {
-      window.removeEventListener("scroll", scrollHandler);
-      btn.removeEventListener("click", () => {
-        const scrollStep = 0;
-        const scrollInterval = setInterval(() => {
-          if (window.scrollY !== 0) {
-            window.scrollBy(0, scrollStep);
-          } else {
-            clearInterval(scrollInterval);
-          }
-        }, 15);
-      });
-    };
-  }, []);
-
   return (
     <>
       <div className="w-full">
@@ -92,23 +53,6 @@ const Index: React.FC = () => {
             icon={<UpSquareOutlined />}
           ></Button>
         </div>
-
-        {/* <svg className="sticky top-10 z-[-99]" viewBox="0 0 500 100">
-          <path
-            d="M 0 20 C 150 150 300 0 500 50 L 500 0 L 0 0"
-            fill="rgb(57, 27, 112)"
-          ></path>
-          <path
-            d="M 0 20 C 150 150 330 -30 500 30 L 500 0 L 0 0"
-            fill="#0E7452"
-            opacity="0.8"
-          ></path>
-          <path
-            d="M 0 20 C 215 150 250 0 500 80 L 500 0 L 0 0"
-            fill="#0E7452"
-            opacity="0.5"
-          ></path>
-        </svg> */}
 
         <div className="pt-5 pb-5 px-[30rem] grid grid-cols-3 gap-4">
           {paginatedBlogs.map((blog, index) => (
@@ -134,10 +78,7 @@ const Index: React.FC = () => {
               <div className="px-6 pt-4 pb-2 ">
                 <Link
                   to={`/blog/${blog.slug}`}
-                  className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 no-underline transition-transform duration-300 ease-in-out
-                  hover:bg-[#565c39]
-                  hover:text-white
-                  hover:-translate-y-1 "
+                  className="inline-block"
                 >
                   Read More
                 </Link>
@@ -148,13 +89,14 @@ const Index: React.FC = () => {
         <div>
           <Pagination
             className="mr-5 text-end"
-            total={blogs?.length}
+            total={blogs.length}
             showTotal={(total, range) =>
-              `${range[0]}-${range[1]} of ${total} items ${range.length}`
+              `${range[0]}-${range[1]} of ${total} items`
             }
             defaultPageSize={pageSize}
             defaultCurrent={currentPage}
             onChange={(page, size) => {handlePageChange(page,size)}}
+              
           />
         </div>
         <Footer />
@@ -162,5 +104,3 @@ const Index: React.FC = () => {
     </>
   );
 };
-
-export default () => <Index />;

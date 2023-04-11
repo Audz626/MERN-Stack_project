@@ -2,13 +2,13 @@
 .hover-to-top {
     /* display: inline-block; */
     position: sticky;
-    font-weight: bold;
-    font-size: large;
-    color: rgb(0, 0, 0);
+    font-weight: 600;
+    font-size: 16px;
+    color: #333333;
     background-color: #ffffff;
     top: 0px;
     z-index: 100;
-    padding: 17px;
+    /* padding: 17px; */
   /* box-shadow: 0 2px 4px rgba(0,0,0,0.2); */
     /* transition: transform 0.3s ease-in-out; */
   }
@@ -21,9 +21,11 @@
 
 .ant-menu-item {
     text-decoration: none !important;
+    transition: transform 0.3s ease-in-out !important;
   }
   .ant-menu-item:hover{
     color : #f6b822 !important;
+    transform: translateY(-5px);
   }
 
 
