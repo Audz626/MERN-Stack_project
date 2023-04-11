@@ -7,6 +7,7 @@ import { UpSquareOutlined } from "@ant-design/icons";
 import { Button, Pagination } from "antd";
 import { Link } from "react-router-dom";
 import "../App.css";
+import "../assets/style/pagination.css"
 
 interface Blog {
   title: string;
@@ -21,15 +22,14 @@ const Index: React.FC = () => {
   const [pageSize, setPageSize] = useState<number>(12);
 
   useEffect(() => {
-    
     getBlogs().then((data) => {
       setBlogs(data.data);
     });
   }, []);
 
   const handlePageChange = (page: number, pageSize?: number) => {
-    console.log('page',page)
-    console.log('pageSize',pageSize)
+    console.log("page", page);
+    console.log("pageSize", pageSize);
     setCurrentPage(page);
     if (pageSize) {
       setPageSize(pageSize);
@@ -93,24 +93,7 @@ const Index: React.FC = () => {
           ></Button>
         </div>
 
-        {/* <svg className="sticky top-10 z-[-99]" viewBox="0 0 500 100">
-          <path
-            d="M 0 20 C 150 150 300 0 500 50 L 500 0 L 0 0"
-            fill="rgb(57, 27, 112)"
-          ></path>
-          <path
-            d="M 0 20 C 150 150 330 -30 500 30 L 500 0 L 0 0"
-            fill="#0E7452"
-            opacity="0.8"
-          ></path>
-          <path
-            d="M 0 20 C 215 150 250 0 500 80 L 500 0 L 0 0"
-            fill="#0E7452"
-            opacity="0.5"
-          ></path>
-        </svg> */}
-
-        <div className="pt-5 pb-5 px-[30rem] grid grid-cols-3 gap-4">
+        <div className="pt-5 pb-5 px-[20rem] grid grid-cols-3 gap-4">
           {paginatedBlogs.map((blog, index) => (
             <div className=" bg-white rounded-[1rem] shadow-lg" key={index}>
               <div className="">
@@ -146,16 +129,24 @@ const Index: React.FC = () => {
           ))}
         </div>
         <div>
-          <Pagination
-            className="mr-5 text-end"
-            total={blogs?.length}
-            showTotal={(total, range) =>
-              `${range[0]}-${range[1]} of ${total} items ${range.length}`
-            }
-            defaultPageSize={pageSize}
-            defaultCurrent={currentPage}
-            onChange={(page, size) => {handlePageChange(page,size)}}
-          />
+          <div className="p-5">
+            {blogs.length > 0 ? (
+              <Pagination
+                className="mr-5 text-end"
+                total={blogs?.length}
+                showTotal={(total, range) =>
+                  `${range[0]}-${range[1]} of ${total} items `
+                }
+                defaultPageSize={pageSize}
+                defaultCurrent={currentPage}
+                onChange={(page, size) => {
+                  handlePageChange(page, size);
+                }}
+              />
+            ) : (
+              <p>No items to display.</p>
+            )}
+          </div>
         </div>
         <Footer />
       </div>

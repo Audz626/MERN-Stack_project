@@ -35,10 +35,10 @@ const Navbar: React.FC = () => {
   return (
     <>
     {/* <div className="sticky"> */}
-      <div className="hover-to-top flex-wrap flex items-center bg-white">
-      <img className="h-[120px] mr-[0px] border-none border-white " src="/src/assets/BIOO.png" alt="test" />
+      <div className="pl-4 hover-to-top flex-wrap flex items-center bg-white">
+      <img className="h-[90px] mr-[0px] border-none border-white " src="/src/assets/BIOO.png" alt="test" />
         <Menu
-          className=" py-8 pr-8 border-none bg-transparent tra"
+          className=" py-6 pr-6 border-none bg-transparent"
           onClick={onClick}
           selectedKeys={[current]}
           mode="horizontal"
