@@ -36,7 +36,7 @@ const Navbar: React.FC = () => {
     <>
     {/* <div className="sticky"> */}
       <div className="pl-4 hover-to-top flex-wrap flex items-center bg-white">
-      <img className="h-[90px] mr-[0px] border-none border-white " src="/src/assets/BIOO.png" alt="test" />
+      <img className="h-[90px] mr-[0px] border-none border-white cursor-pointer" src="/src/assets/BIOO.png" alt="test" />
         <Menu
           className=" py-6 pr-6 border-none bg-transparent"
           onClick={onClick}
