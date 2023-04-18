@@ -14,14 +14,14 @@ const items: MenuProps["items"] = [
     label: "หน้าแรก",
     key: "home",
     icon: <MailOutlined />,
-    // className: 'hover-to-top'
+    // className: 'text-xl'
   },
   {
     label: "เขียนบทความ",
     key: "WriteArticle",
     icon: <AppstoreOutlined />,
     disabled: false,
-    // className: 'hover-to-top'
+    // className: 'text-xl'
   },
 ];
 

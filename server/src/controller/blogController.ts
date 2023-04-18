@@ -58,3 +58,20 @@ export const getSingleBlogs = async (req:Request, res:Response) => {
         res.status(400).json(error.message)
     }
 }
+
+export const remove = async (req:Request, res:Response) => {
+    try{
+        const {slug} = req.params
+        const removeBlog = await myModel.findOneAndRemove({slug}).exec();
+        console.log('removeBlog'+ removeBlog);
+        if(removeBlog){
+            res.json({
+                message: "successfully removed"
+            }) 
+        }else{
+            res.json({message: "no blog found"})
+        }
+    }catch(error:any) {
+        res.status(400).json(error.message)
+    }
+};

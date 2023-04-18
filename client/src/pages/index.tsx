@@ -8,6 +8,7 @@ import { Button, Pagination } from "antd";
 import { Link } from "react-router-dom";
 import "../App.css";
 import "../assets/style/pagination.css"
+import "../assets/style/index.css"
 
 interface Blog {
   title: string;
@@ -81,10 +82,10 @@ const Index: React.FC = () => {
 
   return (
     <>
-      <div className="w-full">
+      <div className="w-full bottom-[100%wv]">
         <Systembar />
         <Navbar />
-        <div className="fixed bottom-4 right-4 z-50 hidden  !z-index-[30]">
+        <div className="fixed bottom-4 right-4 z-50 hidden  !z-index-[40]">
           <Button
             className="!w-[50px] h-[50px] fixed bottom-5 right-5"
             id="back-to-top"
@@ -93,9 +94,9 @@ const Index: React.FC = () => {
           ></Button>
         </div>
 
-        <div className="pt-5 pb-5 px-[20rem] grid grid-cols-3 gap-4">
+        <div className="setCard pt-5 px-[28rem] grid grid-cols-3 gap-4">
           {paginatedBlogs.map((blog, index) => (
-            <div className=" bg-white rounded-[1rem] shadow-lg" key={index}>
+            <div className = " bg-white rounded-[1rem] shadow-lg" key={index}>
               <div className="">
                 <div className="overflow-hidden rounded-t-[1rem] aspect-w-1 aspect-h-1">
                   <img
@@ -129,7 +130,7 @@ const Index: React.FC = () => {
           ))}
         </div>
         <div>
-          <div className="p-5">
+          <div className="p-5 !pt-10 my-10">
             {blogs.length > 0 ? (
               <Pagination
                 className="mr-5 text-end"
@@ -148,8 +149,8 @@ const Index: React.FC = () => {
             )}
           </div>
         </div>
-        <Footer />
       </div>
+      <Footer />
     </>
   );
 };
