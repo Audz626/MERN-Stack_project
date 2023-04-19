@@ -18,6 +18,9 @@ import mongoose,{Schema} from "mongoose";
         type:String,
         lowercase:true,
         unique: true
+    },
+    image:{
+        type:String,
     }
 },{timestamps:true});
 

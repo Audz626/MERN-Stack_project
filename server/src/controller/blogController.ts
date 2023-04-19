@@ -2,9 +2,16 @@ import { Request, Response } from 'express';
 import slugify from 'slugify';
 import {myModel} from '../models/blogModel';
 import {v4 as uuidv4} from 'uuid';
+import multer from 'multer';
+
+const storage = multer.diskStorage({
+    destination: function(req, res, cb){
+        cb(null, 'public/uploads/');
+    }
+})
 
 export async function create(req: Request, res: Response){
-    let {title,content,author} = req.body;
+    let {title,content,author,imgURL} = req.body;
     let slug = slugify(title);
     console.log(author);
 
@@ -24,7 +31,7 @@ export async function create(req: Request, res: Response){
             break;
     }
         try {
-            const blog = await myModel.create({title,content,author,slug}) // create collection name " mymodels " to mongodb 
+            const blog = await myModel.create({title,content,author,imgURL,slug}) // create collection name " mymodels " to mongodb 
             console.log('Document created successfully:',blog);
             res.json(blog)
         } catch (err:any) {

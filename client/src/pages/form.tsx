@@ -1,8 +1,8 @@
-import React, { useState, FormEvent, useEffect } from "react";
+import React, { useState, FormEvent, useEffect, useRef } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
-import {Create} from "../services/api"
-import { FormOutlined } from "@ant-design/icons";
+import { Create } from "../services/api";
+import { FormOutlined, PlusOutlined } from "@ant-design/icons";
 import {
   Card,
   Form,
@@ -21,6 +21,7 @@ import {
 } from "antd";
 import "../App.css";
 import Navbar from "../components/navbar";
+import ImageUploader from "./imageUploadTest";
 
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
@@ -33,46 +34,48 @@ const FormDisabledDemo: React.FC = () => {
     title: "",
     content: "",
     author: "",
+    imageURL: "",
   });
 
-  const { title, content, author } = state;
+  const { title, content, author, imageURL } = state;
+  const [selectedImage, setSelectedImage] = useState(null);
 
-  const submitForm = async(e:any) => {
+  const submitForm = async () => {
     // e.preventDefault();
-    const data = await Create(state)
-    console.table({ title, content, author });
-    console.log(`API URL :${apiURL}`);
-    console.log(`return value :${data}`);
+    // const data = await Create(state)
+    console.table({ title, content, author, imageURL });
+    // console.log(`API URL :${apiURL}`);
+    // console.log(`return value :${data}`);
 
-    if (data === true){
-      Swal.fire({
-              icon: 'success',
-              title: 'Your work has been created',
-              showConfirmButton: false,
-              text: 'บันทึกข้อมูลเรียบร้อย!!',
-              timer: 1500
-            })
-    }else if(data === 'กรุณากรอกข้อมูล'){
-            Swal.fire({
-              icon: 'info',
-              title: data,
-            })
-    }else if(data === 'กรุณาป้อนเนื้อหาบทความ'){
-            Swal.fire({
-              icon: 'info',
-              title: data,
-      })
-    }else if(data === 'ข้อมูลซ้ำ'){
-      Swal.fire({
-        icon: 'warning',
-        title: data,
-      })
-    }else{
-      Swal.fire({
-        icon: 'error',
-        title: data,
-    })
-    }
+    // if (data === true){
+    //   Swal.fire({
+    //           icon: 'success',
+    //           title: 'Your work has been created',
+    //           showConfirmButton: false,
+    //           text: 'บันทึกข้อมูลเรียบร้อย!!',
+    //           timer: 1500
+    //         })
+    // }else if(data === 'กรุณากรอกข้อมูล'){
+    //         Swal.fire({
+    //           icon: 'info',
+    //           title: data,
+    //         })
+    // }else if(data === 'กรุณาป้อนเนื้อหาบทความ'){
+    //         Swal.fire({
+    //           icon: 'info',
+    //           title: data,
+    //   })
+    // }else if(data === 'ข้อมูลซ้ำ'){
+    //   Swal.fire({
+    //     icon: 'warning',
+    //     title: data,
+    //   })
+    // }else{
+    //   Swal.fire({
+    //     icon: 'error',
+    //     title: data,
+    // })
+    // }
     // axios
     //   .post(`${apiURL}/create`, { title, content, author })
     //   .then((response) => {
@@ -114,6 +117,11 @@ const FormDisabledDemo: React.FC = () => {
     setState({ ...state, [name]: event.target.value });
   };
 
+  const handleFileUpload = async (e:any) => {
+    const file = e.target
+    console.log(file);
+  }
+
   const enterLoading = (index: any) => {
     setLoadings((prev) => {
       const newLoadings = [...prev];
@@ -134,7 +142,15 @@ const FormDisabledDemo: React.FC = () => {
     <>
       <Navbar />
       <div className="w-full">
-        <Card className="mt-10 ml-[20rem] mr-[20rem] " title={<h1>เขียนบทความ</h1>} bordered={false}>
+        <Card
+          className="mt-10 ml-[20rem] mr-[20rem] "
+          title={
+            <h1>
+              สร้างบทความ <FormOutlined />
+            </h1>
+          }
+          bordered={false}
+        >
           {/* <h1 className="flex justify-center">เขียนบทความ</h1> */}
           <Form
             onFinish={submitForm}
@@ -152,23 +168,61 @@ const FormDisabledDemo: React.FC = () => {
                 width: "100%",
               }}
             >
-              <Form.Item label={<span style={{fontWeight: 'bold'}}>บทความ <FormOutlined /></span>}>
+              <Form.Item
+                label={
+                  <span style={{ fontWeight: "bold" }}>
+                    บทความ <FormOutlined />
+                  </span>
+                }
+              >
                 <Input value={title} onChange={inputValue("title")} />
               </Form.Item>
-              <Form.Item label={<span style={{fontWeight: 'bold'}}>รายละเอียด <FormOutlined /></span>}>
+              <Form.Item
+                label={
+                  <span style={{ fontWeight: "bold" }}>
+                    รายละเอียด <FormOutlined />
+                  </span>
+                }
+              >
                 <TextArea
                   rows={8}
                   value={content}
                   onChange={inputValue("content")}
                 />
               </Form.Item>
-              <Form.Item label={<span style={{fontWeight: 'bold'}}>ผู้แต่ง <FormOutlined /></span>}>
+              <Form.Item
+                label={
+                  <span style={{ fontWeight: "bold" }}>
+                    ผู้แต่ง <FormOutlined />
+                  </span>
+                }
+              >
                 <Input
                   value={author}
                   onChange={(e) => {
                     setState({ ...state, author: e.target.value });
                   }}
                 />
+              </Form.Item>
+              <Form.Item
+                label={
+                  <span style={{ fontWeight: "bold" }}>
+                    Upload Title Image <FormOutlined />
+                  </span>
+                }
+                valuePropName="imageURL"
+              >
+                {/* <Upload action="/upload.do" listType="picture-card"> */}
+                <Upload 
+                  listType="picture-card"
+                  value={imageURL}
+                  onChange={e=>handleFileUpload(e)}
+                  >
+                  <div>
+                    <PlusOutlined />
+                    <div style={{ marginTop: 8 }}>Upload</div>
+                  </div>
+                </Upload>
               </Form.Item>
               <div className="flex justify-center">
                 <Button
@@ -184,8 +238,22 @@ const FormDisabledDemo: React.FC = () => {
           </Form>
         </Card>
       </div>
+      {/* <ImageUploader/> */}
     </>
   );
 };
 
 export default () => <FormDisabledDemo />;
+
+function convertToBase64(fileList: any) {
+  return new Promise((resolve, reject) => {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(fileList);
+    fileReader.onload = () => {
+      resolve(fileList.result);
+    };
+    fileReader.onerror = (err) => {
+      reject(err);
+    };
+  });
+}
