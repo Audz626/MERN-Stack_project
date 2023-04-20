@@ -215,7 +215,7 @@ const FormDisabledDemo: React.FC = () => {
                 {/* <Upload action="/upload.do" listType="picture-card"> */}
                 <Upload 
                   listType="picture-card"
-                  value={imageURL}
+                  // value={imageURL}
                   onChange={e=>handleFileUpload(e)}
                   >
                   <div>
@@ -245,15 +245,3 @@ const FormDisabledDemo: React.FC = () => {
 
 export default () => <FormDisabledDemo />;
 
-function convertToBase64(fileList: any) {
-  return new Promise((resolve, reject) => {
-    const fileReader = new FileReader();
-    fileReader.readAsDataURL(fileList);
-    fileReader.onload = () => {
-      resolve(fileList.result);
-    };
-    fileReader.onerror = (err) => {
-      reject(err);
-    };
-  });
-}

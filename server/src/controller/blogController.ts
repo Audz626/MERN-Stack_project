@@ -1,8 +1,10 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
+
 import slugify from 'slugify';
 import {myModel} from '../models/blogModel';
 import {v4 as uuidv4} from 'uuid';
 import multer from 'multer';
+import fs from 'fs';
 
 const storage = multer.diskStorage({
     destination: function(req, res, cb){
@@ -10,7 +12,7 @@ const storage = multer.diskStorage({
     }
 })
 
-export async function create(req: Request, res: Response){
+export async function create(req: Request, res: Response, next: NextFunction){
     let {title,content,author,imgURL} = req.body;
     let slug = slugify(title);
     console.log(author);
