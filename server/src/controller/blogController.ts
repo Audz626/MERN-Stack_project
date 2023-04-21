@@ -3,16 +3,12 @@ import { NextFunction, Request, Response } from 'express';
 import slugify from 'slugify';
 import {myModel} from '../models/blogModel';
 import {v4 as uuidv4} from 'uuid';
-import multer from 'multer';
+import formidable from 'formidable';
 import fs from 'fs';
 
-const storage = multer.diskStorage({
-    destination: function(req, res, cb){
-        cb(null, 'public/uploads/');
-    }
-})
 
 export async function create(req: Request, res: Response, next: NextFunction){
+    const form = new formidable.IncomingForm();
     let {title,content,author,imgURL} = req.body;
     let slug = slugify(title);
     console.log(author);

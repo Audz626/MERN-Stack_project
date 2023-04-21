@@ -94,7 +94,7 @@ const Index: React.FC = () => {
           ></Button>
         </div>
 
-        <div className="setCard pt-5 px-[28rem] grid grid-cols-3 gap-4">
+        <div className="setcard pt-5 px-[30rem] grid grid-cols-3 gap-4">
           {paginatedBlogs.map((blog, index) => (
             <div className = " bg-white rounded-[1rem] shadow-lg" key={index}>
               <div className="">
@@ -118,7 +118,7 @@ const Index: React.FC = () => {
               <div className="px-6 pt-4 pb-2 ">
                 <Link
                   to={`/blog/${blog.slug}`}
-                  className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 no-underline transition-transform duration-300 ease-in-out
+                  className="inline-block shadow-lg bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 no-underline transition-transform duration-300 ease-in-out
                   hover:bg-[#565c39]
                   hover:text-white
                   hover:-translate-y-1 "

@@ -9,7 +9,7 @@
     top: 0px;
     z-index: 100;
     /* padding: 17px; */
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     /* transition: transform 0.3s ease-in-out; */
   }
     /* .hover-to-top:hover {

@@ -4,9 +4,11 @@ import {
   MailOutlined,
   SettingOutlined,
   AppstoreTwoTone,
+  LoginOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
-import { Menu } from "antd";
+import { Menu, Button } from "antd";
 import "./../assets/style/navbar.css";
 
 const items: MenuProps["items"] = [
@@ -14,7 +16,7 @@ const items: MenuProps["items"] = [
     label: "หน้าแรก",
     key: "home",
     icon: <MailOutlined />,
-    // className: 'text-xl'
+    // className: 'shadow-lg'
   },
   {
     label: "เขียนบทความ",
@@ -44,6 +46,18 @@ const Navbar: React.FC = () => {
           mode="horizontal"
           items={items}
         ></Menu>
+      <Button className="right-[3%] 
+      transition-transform duration-300 ease-in-out 
+      hover:-translate-y-1
+      absolute
+      bg-[#f6b822]
+      border-none 
+      shadow-lg 
+      hover:!bg-[#006400] 
+      !rounded-full
+      no-underline" 
+      icon={<UserOutlined />} 
+      type="primary" size={'large'}><span className=" ">Login</span></Button>
       </div>
     {/* </div> */}
     </>
