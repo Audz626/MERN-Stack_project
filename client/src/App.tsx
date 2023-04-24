@@ -23,7 +23,7 @@ class MyComponent extends Component<{},MyComponentState> {
 
   render() {
     return (
-      <div className='container p-5'>
+      <div className='container p-[10rem]'>
         <p>Count: {this.state.count}</p>
         <button onClick={this.handleButtonClick}>Increment</button>
         <div className="flex flex-col h-16">

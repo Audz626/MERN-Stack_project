@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import morgan from 'morgan'
+import http from 'http'
 
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
@@ -22,6 +23,6 @@ app.use(logger)
 app.use('/api',blogRoute)
 
 connectDB();
-
+const httpserver = http.createServer(app)
 const port = process.env.PORT || 8080
-app.listen(port, () => console.log(`Server listening on port ${port} !`));
+httpserver.listen(port, () => console.log(`Server listening on port ${port} !`));

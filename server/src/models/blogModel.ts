@@ -4,7 +4,7 @@ import mongoose,{Schema} from "mongoose";
  const blogSchema:Schema = new mongoose.Schema({
     title: {
         type: String,
-        require: true
+        required: true
     },
     content:{
         type:{},
@@ -19,7 +19,7 @@ import mongoose,{Schema} from "mongoose";
         lowercase:true,
         unique: true
     },
-    image:{
+    urlpath:{
         type:String,
     }
 },{timestamps:true});

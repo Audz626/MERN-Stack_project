@@ -14,10 +14,23 @@ body {
   /* overflow-y: hidden; */
 
 }
+@media only screen and (max-width: 1500px) {
+  .setcard{
+    padding-left: 18rem !important;
+    padding-right: 18rem !important;
+  }
+}
 
 @media only screen and (max-width: 1200px){
   .setcard {
     padding-left: 15rem !important;
     padding-right: 15rem !important;
+  }
+}
+
+@media only screen and (max-width: 820px){
+  .setcard{
+    padding-left: 5rem !important;
+    padding-right: 5rem !important;
   }
 }
