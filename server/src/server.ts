@@ -20,6 +20,9 @@ app.use(exp.json())
 app.use(cors())
 app.use(logger)
 
+const rootPath = process.env.ROOT_PATH_MERN ? process.env.ROOT_PATH_MERN : __dirname
+console.log(rootPath)
+app.use(express.static(rootPath + "/uploaded/images"))
 app.use('/api',blogRoute)
 
 connectDB();

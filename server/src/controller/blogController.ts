@@ -14,9 +14,10 @@ console.log(imgpath);
 // console.log(path);
 
 export async function create(req: Request, res: Response, next: NextFunction){
-    const form = new formidable.IncomingForm();
+    const uploadFolders = path.join(imgpath,'public','uploaded/images')
+    const form = new formidable.IncomingForm({multiples:true});
     form.parse(req,async (err:any, fields:any, files:any) => {
-        if (files.urlpath) {console.log('1')}else{console.log('0')}
+        // if (files.urlpath) {console.log('1')}else{console.log('0')}
         let {title,content,author} = fields;
         let slug = typeof title === 'string' ? slugify(title) : '';
         let urlpath = '';
@@ -45,31 +46,28 @@ export async function create(req: Request, res: Response, next: NextFunction){
         }
 
         if (files.urlpath) {
-            const file:any = Array.isArray(files.urlpath) ? files.urlpath[0] : files.urlpath;
-            console.log('file',file)
-            urlpath = `/uploaded/images/${file.newFilename}`;
-            file.path = imgpath + urlpath;
-            // console.log('file,path',file.path)
+            files.urlpath.originalFilename = 'New' + files.urlpath.originalFilename
+            console.log('files',files)
+            console.log(__dirname)
+            const newPath = imgpath + `/uploaded/images/${files.urlpath.originalFilename}`;
 
-            const imagePath = path.join(imgpath, 'uploaded/images/', file.originalFilename);
-            try {
-                await fs.copy(file.path, imagePath);
-                await fs.remove(file.path);
-            } catch (error) {
-                console.error(error);
-                res.status(500).json({ message: 'Failed to save image' });
-                return;
+            try{
+                await fs.copyFile(files.urlpath.filepath,newPath)
+                console.log('upload success')
+                res.status(200).json({message: 'Success!!'})
+            }catch (err) {
+                res.status(500).json({message: 'Failed to save image'})
             }
             
                 }
 
-            try {
-                const blog = await myModel.create({title,content,author,urlpath,slug})
-                // console.log('Document created successfully:',blog);
-                res.json(blog)
-            } catch (err:any) {
-                    res.status(400).json({message:"ข้อมูลซ้ำ"});
-            }
+            // try {
+            //     const blog = await myModel.create({title,content,author,urlpath,slug})
+            //     // console.log('Document created successfully:',blog);
+            //     res.json(blog)
+            // } catch (err:any) {
+            //         res.status(400).json({message:"ข้อมูลซ้ำ"});
+            // }
     })
     
     // myModel.create({title,content,author,slug}).then((data) => {

@@ -14,14 +14,15 @@ import mongoose,{Schema} from "mongoose";
         type:String,
         default:"Admin"
     },
+    urlpath:{
+        type:String,
+    },
     slug:{
         type:String,
         lowercase:true,
         unique: true
     },
-    urlpath:{
-        type:String,
-    }
+    
 },{timestamps:true});
 
 export const myModel = mongoose.model('MyModel', blogSchema);
