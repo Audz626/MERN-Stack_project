@@ -9,13 +9,19 @@ import { Link } from "react-router-dom";
 import "../App.css";
 import "../assets/style/pagination.css"
 import "../assets/style/index.css"
+import "../assets/style/spinner.css"
+import _slug from "./_slug";
 
 interface Blog {
+  urlpath: any;
   title: string;
   content: string;
   author: string;
   slug: string;
 }
+
+const imageURL = import.meta.env.VITE_API + "/images";
+console.log(imageURL)
 
 const Index: React.FC = () => {
   const [blogs, setBlogs] = useState<Array<Blog>>([]);
@@ -25,6 +31,8 @@ const Index: React.FC = () => {
   useEffect(() => {
     getBlogs().then((data) => {
       setBlogs(data.data);
+      console.table(data.data)
+      // console.log(blogs)
     });
   }, []);
 
@@ -85,6 +93,7 @@ const Index: React.FC = () => {
       <div className="w-full bottom-[100%wv]">
         <Systembar />
         <Navbar />
+
         <div className="fixed bottom-4 right-4 z-50 hidden  !z-index-[40]">
           <Button
             className="!w-[50px] h-[50px] fixed bottom-5 right-5"
@@ -93,7 +102,6 @@ const Index: React.FC = () => {
             icon={<UpSquareOutlined />}
           ></Button>
         </div>
-
         <div className="setcard pt-5 px-[30rem] grid grid-cols-3 gap-4">
           {paginatedBlogs.map((blog, index) => (
             <div className = " bg-white rounded-[1rem] shadow-lg" key={index}>
@@ -102,8 +110,8 @@ const Index: React.FC = () => {
                   <img
                     className="max-w-full max-h-full object-fill cursor-pointer rounded-t-[1rem] transition-transform !duration-500 ease-in-out hover:scale-110 aspect-w-1 aspect-h-1"
                     // className="w-[100%] object-contain hover:scale-110 duration-300 transition-transform ease-in-out"
-                    src="src/assets/hummingbird.jpg"
-                    alt="test"
+                    src={`${imageURL}/${blog?.urlpath}`}
+                    alt={(`${blog?.slug}`)}
                   />
                 </div>
                 <div className="font-bold text-xl my-4 mx-4 cursor-pointer">
@@ -145,7 +153,9 @@ const Index: React.FC = () => {
                 }}
               />
             ) : (
-              <p>No items to display.</p>
+              <>
+<div className="lds-spinner mx-[50%] my-[15%]"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+            </>
             )}
           </div>
         </div>

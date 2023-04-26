@@ -25,4 +25,4 @@ import mongoose,{Schema} from "mongoose";
     
 },{timestamps:true});
 
-export const myModel = mongoose.model('MyModel', blogSchema);
+export const blogspostModel = mongoose.model('blogspost', blogSchema);

@@ -7,7 +7,7 @@ interface MyData{
 }
 export const Create = (data:MyData) =>{
 return axios
-    .post(`${API_URL}/create`, data)
+    .post(`${API_URL}/api/create`, data)
     .then((res) => {
         return true;
     })
@@ -18,7 +18,7 @@ return axios
 
 export const getBlogs = () =>{
     return axios
-    .get(`${API_URL}/blogs`)
+    .get(`${API_URL}/api/blogs`)
     .then(res => {
         return res;
     })
@@ -29,7 +29,7 @@ export const getBlogs = () =>{
 
 export const getBlogsBySlug = (data : any) =>{
     return axios
-    .get(`${API_URL}/blog/${data}`)
+    .get(`${API_URL}/api/blog/${data}`)
     .then(res => {
         return res;
     })

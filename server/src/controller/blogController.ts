@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import path  from 'path';
 import slugify from 'slugify';
-import {myModel} from '../models/blogModel';
+import {blogspostModel} from '../models/blogModel';
 import {v4 as uuidv4} from 'uuid';
 import formidable from 'formidable';
 import * as fs from "fs-extra";
@@ -14,7 +14,7 @@ console.log(imgpath);
 // console.log(path);
 
 export async function create(req: Request, res: Response, next: NextFunction){
-    const uploadFolders = path.join(imgpath,'public','uploaded/images')
+    // const uploadFolders = path.join(imgpath,'public','uploaded/images')
     const form = new formidable.IncomingForm({multiples:true});
     form.parse(req,async (err:any, fields:any, files:any) => {
         // if (files.urlpath) {console.log('1')}else{console.log('0')}
@@ -36,38 +36,38 @@ export async function create(req: Request, res: Response, next: NextFunction){
         switch (true){
             case !title || '':
                 return res.status(400).json({message:"กรุณากรอกข้อมูล"})
-                break;
+                
             case !content || '':
                 return res.status(400).json({message:"กรุณาป้อนเนื้อหาบทความ"})
-                break;
+                
             case author == "":
                 author = "Anonymous";
                 break;
         }
 
         if (files.urlpath) {
-            files.urlpath.originalFilename = 'New' + files.urlpath.originalFilename
+            files.urlpath.originalFilename = slug + files.urlpath.originalFilename
             console.log('files',files)
-            console.log(__dirname)
-            const newPath = imgpath + `/uploaded/images/${files.urlpath.originalFilename}`;
+            // console.log(__dirname)
+            const newPath = imgpath + `${files.urlpath.originalFilename}`;
+            urlpath =`/uploaded/images/${files.urlpath.originalFilename}`;
+            console.log('urlpath',urlpath)
 
             try{
                 await fs.copyFile(files.urlpath.filepath,newPath)
-                console.log('upload success')
-                res.status(200).json({message: 'Success!!'})
+                const blog = await blogspostModel.create({title,content,author,urlpath,slug})
+                console.log('upload success',blog)
+                res.status(200).json(blog)
             }catch (err) {
-                res.status(500).json({message: 'Failed to save image'})
+                res.status(500).json({message: 'Failed to record'})
             }
-            
                 }
 
-            // try {
-            //     const blog = await myModel.create({title,content,author,urlpath,slug})
-            //     // console.log('Document created successfully:',blog);
-            //     res.json(blog)
-            // } catch (err:any) {
-            //         res.status(400).json({message:"ข้อมูลซ้ำ"});
-            // }
+        // try {
+            
+        // } catch (err:any) {
+        //         res.status(400).json({message:"ข้อมูลซ้ำ"});
+        // }
     })
     
     // myModel.create({title,content,author,slug}).then((data) => {
@@ -78,7 +78,7 @@ export async function create(req: Request, res: Response, next: NextFunction){
 
 export const getBlogs = async (req:Request,res:Response) => {
     try{
-        const allBlog = await myModel.find({}).exec();
+        const allBlog = await blogspostModel.find({}).exec();
         console.log(allBlog);
         res.json(allBlog);
     }catch(error:any) {
@@ -90,7 +90,7 @@ export const getBlogs = async (req:Request,res:Response) => {
 export const getSingleBlogs = async (req:Request, res:Response) => {
     try{
         const {slug} = req.params
-        const singleBlog = await myModel.findOne({slug}).exec();
+        const singleBlog = await blogspostModel.findOne({slug}).exec();
         console.log('singleBlog'+ singleBlog);
         res.json(singleBlog);
     }catch(error:any) {
@@ -101,7 +101,7 @@ export const getSingleBlogs = async (req:Request, res:Response) => {
 export const remove = async (req:Request, res:Response) => {
     try{
         const {slug} = req.params
-        const removeBlog = await myModel.findOneAndRemove({slug}).exec();
+        const removeBlog = await blogspostModel.findOneAndRemove({slug}).exec();
         console.log('removeBlog'+ removeBlog);
         if(removeBlog){
             res.json({

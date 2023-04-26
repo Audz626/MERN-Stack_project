@@ -22,10 +22,10 @@ app.use(logger)
 
 const rootPath = process.env.ROOT_PATH_MERN ? process.env.ROOT_PATH_MERN : __dirname
 console.log(rootPath)
-app.use(express.static(rootPath + "/uploaded/images"))
+app.use(exp.static(rootPath + "/uploaded"))
 app.use('/api',blogRoute)
 
 connectDB();
-const httpserver = http.createServer(app)
+// const httpserver = http.createServer(app)
 const port = process.env.PORT || 8080
-httpserver.listen(port, () => console.log(`Server listening on port ${port} !`));
+app.listen(port, () => console.log(`Server listening on port ${port} !`));

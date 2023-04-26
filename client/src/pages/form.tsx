@@ -34,16 +34,16 @@ const FormDisabledDemo: React.FC = () => {
     title: "",
     content: "",
     author: "",
-    imageURL: "",
+    urlpath: "",
   });
 
-  const { title, content, author, imageURL } = state;
+  const { title, content, author, urlpath } = state;
   const [selectedImage, setSelectedImage] = useState(null);
 
   const submitForm = async () => {
     // e.preventDefault();
     // const data = await Create(state)
-    console.table({ title, content, author, imageURL });
+    console.table({ title, content, author, urlpath });
     // console.log(`API URL :${apiURL}`);
     // console.log(`return value :${data}`);
 

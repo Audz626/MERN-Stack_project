@@ -13,10 +13,11 @@ dotenv.config();
 // const db_con = mongoose.connection;
 
 const db_con:any = process.env.DATABASE;
+const db_bio_con:any = process.env.BIO_BLOG_DB;
 
 const connectDB = async () => {
     try {
-        await mongoose.connect(db_con);
+        await mongoose.connect(db_bio_con);
         console.log("Connected to MongoDB"); 
     } catch (error) {
         console.log("Error", error);
